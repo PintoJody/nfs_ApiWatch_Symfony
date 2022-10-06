@@ -1,3 +1,6 @@
 controllers:
     resource: ../src/Controller/
     type: attribute
+
+api_login_check:
+    path: app_api_userapp_api_user_login

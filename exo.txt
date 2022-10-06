@@ -1,0 +1,5 @@
+=> Faire la partie user front
+=> L'utilisateur peut se connecter 
+=> L'utilisateur doit pouvoir ajouter un article a son panier 
+=> Il doit pouvoir remplir des informations de profil 
+=> Test unitaires
