@@ -66,6 +66,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
     /**
+     * A visual identifier that represents this user.
+     *
+     * @see UserInterface
+     */
+    public function getUserId(): string
+    {
+        return (integer) $this->id;
+    }
+
+    /**
      * @see UserInterface
      */
     public function getRoles(): array

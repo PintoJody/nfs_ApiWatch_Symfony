@@ -44,6 +44,7 @@ class ApiWatchController extends AbstractController
                 "bluetooth" => $data->isBluetooth(),
                 "weight" => $data->getWeight(),
                 "picture" => $data->getPicture(),
+                "createdAt" => $data->getCreatedAt()
             ];
         }
 

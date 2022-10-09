@@ -4,3 +4,8 @@ controllers:
 
 api_login_check:
     path: app_api_userapp_api_user_login
+
+
+app_logout:
+    path: /api/user/logout
+    methods: GET

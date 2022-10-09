@@ -2,12 +2,14 @@
 
 namespace App\Controller;
 
+
 use App\Entity\User;
 use Doctrine\Persistence\ManagerRegistry;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 #[Route('/api/user', name: 'app_api_user')]
@@ -31,10 +33,14 @@ class ApiUserController extends AbstractController
         //Stock password for hash
         if ($request->isMethod('POST')) {
             $user = new User();
-            $user->setEmail($request->get('email'));
+            $datas = json_decode($request->getContent());
+
+            $user->setEmail($datas->email);
+            $plainPassword = $datas->password;
+
             $user->setPassword($passwordHasher->hashPassword(
                 $user,
-                $request->request->get('password')
+                $plainPassword
             ));
 
             $this->entityManager->persist($user);
@@ -43,7 +49,7 @@ class ApiUserController extends AbstractController
 
         
         return $this->json([
-            'message' => 'User n° '.$user->getId().' create successfully !'
+            'message' => 'User n° '.$user->getId().' create successfully !',
         ]);
     }
 
@@ -51,8 +57,12 @@ class ApiUserController extends AbstractController
     public function login()
     {}
 
-    #[Route('/logout', name: 'app_api_user_logout', methods: ['GET'])]
+    #[Route('/logout', name: 'app_api_user_logout')]
     public function logout()
-    {}
+    {
+        return $this->json([
+            'message' => 'Disconnect',
+        ]);
+    }
     
 }
